@@ -7,11 +7,11 @@ const app = express();
 const PORT = 5000;
 
 
+app.use(express.static("public"))
+// app.get("/", (req, res) =>{
+//     console.log("Api is running");
 
-app.get("/", (req, res) =>{
-    console.log("Api is running");
-
-})
+// })
 
 app.get("/api/courses", (req, res) =>{
     res.json(courses);
@@ -23,10 +23,9 @@ app.get("/api/courses/:id", (req, res) =>{
     res.json(course);
 });
 
-app.use(express.static(path.join(__dirname, '/frontend/build')))
 
 app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, 'frontend','build' ,'index.html'))
+  res.sendFile(path.join(__dirname + "/public/build/index.html" ))
 )
 
 app.listen(PORT || 5000, ()=>{
